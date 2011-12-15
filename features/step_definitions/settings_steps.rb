@@ -9,3 +9,9 @@ end
 Then /^"([^"]*)" should hold "([^"]*)"$/ do |key, value|
   Settings.send(key).should eq(value)
 end
+
+Then /^Settings\.keys should include:$/ do |table|
+  table.raw.flatten.each do |key|
+    Settings.keys.should include(key.to_sym)
+  end
+end

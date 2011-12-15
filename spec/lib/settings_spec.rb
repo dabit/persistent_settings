@@ -81,4 +81,19 @@ describe Settings do
       end
     end
   end
+
+  describe :keys do
+    let(:settings) do
+      [ mock(:var => 'a_key'), mock(:var => 'another_key') ]
+    end
+
+    before do
+      Settings.should_receive(:select).with(:var).and_return(settings)
+    end
+
+    subject { Settings.keys }
+
+    specify { should include(:a_key) }
+    specify { should include(:another_key) }
+  end
 end

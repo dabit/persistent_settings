@@ -46,5 +46,9 @@ class Settings < ActiveRecord::Base
     end
   end
 
+  def self.keys
+    Settings.select(:var).collect { |s| s.var.to_sym }
+  end
+
   load_from_persistance if connected? && table_exists?
 end
