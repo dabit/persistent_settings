@@ -4,7 +4,7 @@ require "persistent_settings"
 
 Gem::Specification.new do |s|
   s.name        = "persistent_settings"
-  s.version     = Settings::VERSION
+  s.version     = "1.0.0"
   s.authors     = ["David Padilla"]
   s.email       = ["david@crowdint.com"]
   s.homepage    = ""
