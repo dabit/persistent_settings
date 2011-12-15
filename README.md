@@ -35,3 +35,6 @@ Reload your app:
 
 It accepts all kinds of objects as the value
 
+# License
+
+MIT License. Copyright 2011, Crowd Interactive http://www.crowdint.com
