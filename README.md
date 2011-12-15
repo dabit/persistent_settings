@@ -35,7 +35,3 @@ Reload your app:
 
 It accepts all kinds of objects as the value
 
-# TODO
-
-* Test the generator
-
