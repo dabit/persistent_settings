@@ -1,4 +1,6 @@
 class Settings < ActiveRecord::Base
+  include ::PersistentSettings
+
   serialize :value
 
   def self.method_missing(method_name, *args)
