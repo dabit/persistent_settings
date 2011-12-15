@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["David Padilla"]
   s.email       = ["david@crowdint.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Simple global Settings class for ActiveRecord based applications}
+  s.description = %q{Simple global Settings class for ActiveRecord based applications}
 
   s.rubyforge_project = "persistent_settings"
 
