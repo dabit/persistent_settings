@@ -1,3 +1,4 @@
+require 'rails'
 require 'active_record'
 require 'persistent_settings'
 
