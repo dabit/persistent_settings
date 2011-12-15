@@ -2,8 +2,8 @@ require 'rails/generators'
 require 'rails/generators/migration'
 
 module PersistentSettings
-  class MigrationGenerator < Rails::Generators::Base
-    include Rails::Generators::Migration
+  class MigrationGenerator < ::Rails::Generators::Base
+    include ::Rails::Generators::Migration
     source_root File.expand_path('../templates', __FILE__)
 
     def install
