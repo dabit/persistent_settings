@@ -1,5 +1,5 @@
-require "persistent_settings/version"
+require "settings/version"
 
-module PersistentSettings
+module Settings
   # Your code goes here...
 end
