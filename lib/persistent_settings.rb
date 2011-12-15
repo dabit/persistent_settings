@@ -1,5 +1,3 @@
+require "active_record"
+require "settings"
 require "settings/version"
-
-module Settings
-  # Your code goes here...
-end

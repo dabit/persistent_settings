@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "settings/version"
+require "persistent_settings"
 
 Gem::Specification.new do |s|
   s.name        = "persistent_settings"
@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activerecord', '~> 3'
   s.add_development_dependency "rspec"
+  s.add_development_dependency "sqlite3", "~> 1.3"
 end
