@@ -14,6 +14,14 @@ Install
 
     bundle install
 
+Create the migrations
+
+    rails g persistent_settings:migration
+
+Run those migrations
+
+    rake db:migrate
+
 ## Usage
 
 The gem adds a new class called Settings. It will automatically create new
