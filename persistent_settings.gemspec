@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "persistent_settings"
-  s.version     = "1.0.0"
+  s.version     = "1.0.1"
   s.authors     = ["David Padilla"]
   s.email       = ["david@crowdint.com"]
   s.homepage    = ""
