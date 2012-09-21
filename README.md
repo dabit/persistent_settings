@@ -37,6 +37,17 @@ Reload your app:
 
 It accepts all kinds of objects as the value
 
+## Known Issues
+
+Sometimes, settings are not loaded automatically at startup. If that's the case
+add an initializer to your Rails app.
+
+    #
+    # config/initializers/settings.rb
+    #
+
+    Settings.load_from_persistance
+
 # License
 
 MIT License. Copyright 2011, Crowd Interactive http://www.crowdint.com
