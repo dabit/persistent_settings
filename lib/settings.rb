@@ -40,15 +40,19 @@ class Settings < ActiveRecord::Base
     end
   end
 
-  def self.load_from_persistance
+  def self.load_from_persistance!
     self.all.each do |setting|
       self.send("#{setting.var}=", setting.value)
     end
+  end
+
+  def self.load_from_persistance
+    load_from_persistance! if connected? && table_exists?
   end
 
   def self.keys
     Settings.select(:var).collect { |s| s.var.to_sym }
   end
 
-  load_from_persistance if connected? && table_exists?
+  load_from_persistance
 end

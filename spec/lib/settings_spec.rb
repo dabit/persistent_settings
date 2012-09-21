@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Settings do
-  before do
-  end
   describe :assignation? do
     context "the method name ends with =" do
       it "returns true" do
@@ -68,7 +66,7 @@ describe Settings do
 
         it "pulls the value from the database and creates its setter and getter" do
           Settings.should_receive(:persisted_method=).with('some value')
-          Settings.load_from_persistance
+          Settings.load_from_persistance!
         end
       end
 
@@ -95,5 +93,53 @@ describe Settings do
 
     specify { should include(:a_key) }
     specify { should include(:another_key) }
+  end
+
+  describe :load_from_persistance! do
+    it "loads all settings from persistance and sets it up" do
+      settings = [ Settings.new(:var => 'foo', :value => 'bar') ]
+      Settings.should_receive(:all).and_return(settings)
+      Settings.should_receive("foo=").with('bar')
+
+      Settings.load_from_persistance!
+    end
+  end
+
+  describe :load_from_persistance do
+    context "AR is connected and table is created" do
+      before do
+        Settings.stub(:connected?).and_return true
+        Settings.stub(:table_exists?).and_return true
+      end
+
+      it "calls load_from_persistance!" do
+        Settings.should_receive(:load_from_persistance!)
+        Settings.load_from_persistance
+      end
+    end
+
+    context "AR is not connected" do
+      before do
+        Settings.stub(:connected?).and_return false
+        Settings.stub(:table_exists?).and_return true
+      end
+
+      it "calls load_from_persistance!" do
+        Settings.should_not_receive(:load_from_persistance!)
+        Settings.load_from_persistance
+      end
+    end
+
+    context "table is not created" do
+      before do
+        Settings.stub(:connected?).and_return false
+        Settings.stub(:table_exists?).and_return false
+      end
+
+      it "calls load_from_persistance!" do
+        Settings.should_not_receive(:load_from_persistance!)
+        Settings.load_from_persistance
+      end
+    end
   end
 end
