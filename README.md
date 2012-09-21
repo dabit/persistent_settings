@@ -1,5 +1,7 @@
 # Persistent Settings
 
+[![Build Status](https://secure.travis-ci.org/dabit/persistent_settings.png)](http://travis-ci.org/dabit/persistent_settings)
+
 A simple key value store for ActiveRecord based applications.
 
 Best used to store global app settings.
