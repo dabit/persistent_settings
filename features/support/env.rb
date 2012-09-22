@@ -8,3 +8,8 @@ require 'persistent_settings'
     t.column :value, :string
   end
 end
+
+module Rails
+  RAILS_CACHE = ActiveSupport::Cache::MemoryStore.new
+    #config.cache_store = :memory_store
+end
