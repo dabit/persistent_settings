@@ -16,13 +16,50 @@ describe Settings do
   end
 
   describe :define_setter_and_getter do
-    it "creates the setter and getter methods" do
+    before do
       Settings.define_setter_and_getter(:method_name=)
+    end
+
+    it "creates the setter and getter methods" do
       Settings.should respond_to(:method_name=)
       Settings.should respond_to(:method_name)
-      Settings.should_receive(:persist)
-      Settings.method_name = 'value'
-      Settings.method_name.should == 'value'
+    end
+
+    context :getter_method do
+      context "value is persisted on cache" do
+        before do
+          Settings.should_receive(:read_from_cache).with('method_name').
+              and_return('value from cache')
+        end
+
+        it "reads and returns value from cache" do
+          Settings.method_name.should == 'value from cache'
+        end
+      end
+
+      context "value is not persisted on cache" do
+        before do
+          Settings.should_receive(:read_from_cache).with('method_name')
+        end
+
+        it "reads and returns value from persistance, then saves to cache" do
+          Settings.should_receive(:read_from_persistance).with('method_name').
+              and_return 'value from persistance'
+
+          Settings.should_receive(:write_to_cache).
+              with('method_name', 'value from persistance')
+
+          Settings.method_name.should == 'value from persistance'
+        end
+      end
+    end
+
+    context :setter_method do
+      it "persists and writes to cache the key/value" do
+        Settings.should_receive(:persist).with('method_name', 'value')
+        Settings.should_receive(:write_to_cache).with('method_name', 'value')
+        Settings.method_name = 'value'
+      end
     end
   end
 
@@ -44,6 +81,44 @@ describe Settings do
         Settings.stub_chain(:where, :last).and_return(nil)
         Settings.should_receive(:create).with(:var => 'new_method', :value => 'value')
         Settings.persist('new_method', 'value')
+      end
+    end
+  end
+
+  describe :read_from_persistance do
+    it "reads the value from persistance" do
+      object = Settings.new :var => 'foo', :value => 'bar'
+      Settings.should_receive(:find_by_var).with('foo').and_return(object)
+
+      Settings.read_from_persistance('foo').should eq 'bar'
+    end
+  end
+
+  describe :cache_key_for do
+    it "returns the name for the rails cache key" do
+      Settings.cache_key_for('foo').should eq('settings/foo')
+    end
+  end
+
+  context "cache" do
+    let(:cache) { mock }
+
+    before do
+      Rails.should_receive(:cache).and_return cache
+      Settings.stub(:cache_key_for).with('foo').and_return 'settings/foo'
+    end
+
+    describe :write_to_cache do
+      it "writes the key, value to Rails cache" do
+        cache.should_receive(:write).with('settings/foo', 'bar')
+        Settings.write_to_cache('foo', 'bar')
+      end
+    end
+
+    describe :read_from_cache do
+      it "reads the value from Rails cache" do
+        cache.should_receive(:fetch).with('settings/foo')
+        Settings.read_from_cache('foo')
       end
     end
   end
