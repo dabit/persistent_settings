@@ -106,15 +106,38 @@ describe Settings do
   end
 
   describe :load_from_persistance do
+    context "is ready" do
+      before do
+        Settings.stub(:ready?).and_return true
+      end
+
+      it "calls load_from_persistance!" do
+        Settings.should_receive(:load_from_persistance!)
+        Settings.load_from_persistance
+      end
+    end
+
+    context "not ready" do
+      before do
+        Settings.stub(:ready?).and_return false
+      end
+
+      it "calls load_from_persistance!" do
+        Settings.should_not_receive(:load_from_persistance!)
+        Settings.load_from_persistance
+      end
+    end
+  end
+
+  describe :ready? do
     context "AR is connected and table is created" do
       before do
         Settings.stub(:connected?).and_return true
         Settings.stub(:table_exists?).and_return true
       end
 
-      it "calls load_from_persistance!" do
-        Settings.should_receive(:load_from_persistance!)
-        Settings.load_from_persistance
+      it "is true" do
+        Settings.ready?.should be_true
       end
     end
 
@@ -124,9 +147,8 @@ describe Settings do
         Settings.stub(:table_exists?).and_return true
       end
 
-      it "calls load_from_persistance!" do
-        Settings.should_not_receive(:load_from_persistance!)
-        Settings.load_from_persistance
+      it "is false" do
+        Settings.ready?.should be_false
       end
     end
 
@@ -136,9 +158,8 @@ describe Settings do
         Settings.stub(:table_exists?).and_return false
       end
 
-      it "calls load_from_persistance!" do
-        Settings.should_not_receive(:load_from_persistance!)
-        Settings.load_from_persistance
+      it "is false" do
+        Settings.ready?.should be_false
       end
     end
   end

@@ -47,7 +47,11 @@ class Settings < ActiveRecord::Base
   end
 
   def self.load_from_persistance
-    load_from_persistance! if connected? && table_exists?
+    load_from_persistance! if ready?
+  end
+
+  def self.ready?
+    connected? && table_exists?
   end
 
   def self.keys
