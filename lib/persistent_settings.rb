@@ -11,6 +11,7 @@ end
 module Persistent
   autoload :Settings, 'persistent/settings'
   module Settings
+    autoload :Caching, 'persistent/settings/caching'
     autoload :Persistance, 'persistent/settings/persistance'
   end
 end

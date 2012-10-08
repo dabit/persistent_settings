@@ -4,6 +4,7 @@ module Persistent
 
     def self.included(base)
       base.send :extend, Persistent::Settings::ClassMethods
+      base.send :extend, Persistent::Settings::Caching
       base.send :extend, Persistent::Settings::Persistance
       base.send :serialize, :value
     end
@@ -44,18 +45,6 @@ module Persistent
 
       def assignation?(method_name)
         method_name.to_s.match(/=$/)
-      end
-
-      def cache_key_for(key)
-        "settings/#{key}"
-      end
-
-      def write_to_cache(key, value)
-        ::Rails.cache.write(cache_key_for(key), value)
-      end
-
-      def read_from_cache(key)
-        ::Rails.cache.fetch(cache_key_for(key))
       end
 
       def ready?
