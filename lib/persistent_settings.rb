@@ -2,6 +2,7 @@ require "rails/version"
 require "rails/engine"
 require "active_record"
 require "persistent_settings/version"
+require "persistent/settings"
 require "settings"
 
 unless Rails::VERSION::STRING < "3.1"
