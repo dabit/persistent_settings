@@ -16,24 +16,25 @@ Install
 
     bundle install
 
-Create the migrations
+Use the generator to create a Config class, or whatever you want to call it, that
+will include all the Persistent Settings functionality.
 
-    rails g persistent_settings:migration
+    rails g persistent_settings:create config
 
-Run those migrations
+Run migrations
 
     rake db:migrate
 
 ## Usage
 
-The gem adds a new class called Settings. It will automatically create new
+Assuming that your Persistent Settings class is named Config, it will automatically create new
 keys as you assign a value to them.
 
-    Settings.a_key = 'value'
+    Config.a_key = 'value'
 
 Reload your app:
 
-    Settings.a_key # => 'value'
+    Config.a_key # => 'value'
 
 It accepts all kinds of objects as the value
 
