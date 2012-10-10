@@ -54,6 +54,17 @@ module Persistent
       def keys
         self.select(:var).collect { |s| s.var.to_sym }
       end
+
+      def attr_accessor(*args)
+        @@accessors ||= []
+        @@accessors << args[0]
+        super(*args)
+      end
+
+      def accessors
+        @@accessors ||= []
+        @@accessors
+      end
     end
   end
 end

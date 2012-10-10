@@ -244,4 +244,11 @@ describe Persistent::Settings do
       end
     end
   end
+
+  describe :accessors do
+    it "returns accessors" do
+      Config.send(:attr_accessor, :access_key)
+      Config.accessors.should include(:access_key)
+    end
+  end
 end
