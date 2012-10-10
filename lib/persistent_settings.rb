@@ -16,4 +16,4 @@ module Persistent
   end
 end
 
-require "settings"
+module PersistentSettings ; end

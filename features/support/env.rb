@@ -15,3 +15,7 @@ end
 module Rails
   RAILS_CACHE = ActiveSupport::Cache::MemoryStore.new
 end
+
+class Settings < ActiveRecord::Base
+  include Persistent::Settings
+end

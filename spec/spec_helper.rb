@@ -11,3 +11,7 @@ ActiveRecord::Base.logger = Logger.new("test.log")
     t.string "value"
   end
 end
+
+class Settings < ActiveRecord::Base
+  include Persistent::Settings
+end
