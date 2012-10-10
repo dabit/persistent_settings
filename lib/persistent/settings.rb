@@ -11,11 +11,14 @@ module Persistent
 
     module ClassMethods
       @@mutex = Mutex.new
+      @@accessors = []
 
       def method_missing(method_name, *args)
         if assignation?(method_name)
           self.define_setter_and_getter(method_name)
           self.send(method_name, args.first)
+        elsif accessors.include?(method_name)
+          nil
         else
           super
         end
@@ -55,15 +58,14 @@ module Persistent
         self.select(:var).collect { |s| s.var.to_sym }
       end
 
-      def attr_accessor(*args)
-        @@accessors ||= []
-        @@accessors << args[0]
-        super(*args)
+      def accessors
+        @@accessors
       end
 
-      def accessors
-        @@accessors ||= []
-        @@accessors
+      private
+      def attr_accessor(*args)
+        @@accessors << args[0]
+        super(*args)
       end
     end
   end

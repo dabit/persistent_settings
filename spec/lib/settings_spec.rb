@@ -159,6 +159,13 @@ describe Persistent::Settings do
         end
       end
     end
+
+    context "method that does not exist but is an accessor" do
+      it "returns nil" do
+        Config.send(:attr_accessor, :bananas)
+        Config.bananas.should be_nil
+      end
+    end
   end
 
   describe :keys do
