@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'railties', '~> 3.0'
   s.add_dependency 'activerecord', '~> 3.0'
+  s.add_development_dependency "autotest"
+  s.add_development_dependency "autotest-growl"
   s.add_development_dependency "cucumber" , "~> 1.1.4"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"    , "~> 2.7.0"
