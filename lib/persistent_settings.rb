@@ -8,10 +8,6 @@ require "generators/persistent_settings/create_generator"
 
 module Persistent
   autoload :Settings, 'persistent/settings'
-  module Settings
-    autoload :Caching, 'persistent/settings/caching'
-    autoload :Persistance, 'persistent/settings/persistance'
-  end
 end
 
 module PersistentSettings ; end

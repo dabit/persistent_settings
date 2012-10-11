@@ -1,15 +1,19 @@
+require 'persistent/settings/caching'
+require 'persistent/settings/persistance'
+
 module Persistent
   module Settings
     include ActiveModel::Serialization
 
     def self.included(base)
-      base.send :extend, Persistent::Settings::ClassMethods
-      base.send :extend, Persistent::Settings::Caching
-      base.send :extend, Persistent::Settings::Persistance
+      base.send :extend, ClassMethods
       base.send :serialize, :value
     end
 
     module ClassMethods
+      include Persistent::Settings::Caching
+      include Persistent::Settings::Persistance
+
       @@mutex = Mutex.new
       @@accessors = []
 
