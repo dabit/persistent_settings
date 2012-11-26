@@ -1,6 +1,5 @@
 class Settings < ActiveRecord::Base
   include ::PersistentSettings
-  @mutex = Mutex.new
 
   serialize :value
 
@@ -18,10 +17,8 @@ class Settings < ActiveRecord::Base
 
     (class << self; self; end).instance_eval do
       define_method method_name do |value|
-        @mutex.synchronize do
-          persist(getter, value)
-          write_to_cache getter, value
-        end
+        persist(getter, value)
+        write_to_cache getter, value
       end
 
       define_method getter do
