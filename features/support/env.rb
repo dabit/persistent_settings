@@ -12,9 +12,7 @@ ActiveRecord::Base.logger = Logger.new("test.log")
   end
 end
 
-module Rails
-  RAILS_CACHE = ActiveSupport::Cache::MemoryStore.new
-end
+::Rails.cache = ActiveSupport::Cache::MemoryStore.new
 
 class Settings < ActiveRecord::Base
   include Persistent::Settings
