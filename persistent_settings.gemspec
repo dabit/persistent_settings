@@ -18,12 +18,12 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'railties', '~> 3.0'
-  s.add_dependency 'activerecord', '~> 3.0'
+  s.add_dependency 'railties', '~> 4.0.0'
+  s.add_dependency 'activerecord', '~> 4.0.0'
   s.add_development_dependency "autotest"
   s.add_development_dependency "autotest-growl"
-  s.add_development_dependency "cucumber" , "~> 1.1.4"
+  s.add_development_dependency "cucumber" , "~> 1.3.8"
   s.add_development_dependency "rake"
-  s.add_development_dependency "rspec"    , "~> 2.7.0"
+  s.add_development_dependency "rspec"    , "~> 2.14.1"
   s.add_development_dependency "sqlite3"  , "~> 1.3"
 end

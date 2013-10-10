@@ -49,6 +49,12 @@ add an initializer to your Rails app.
 
     Settings.load_from_persistance
 
+
+# Important
+
+Starting from version 1.4 this gem is compatible with Rails 4.0 or better, if you are looking for a version compatible with Rails 3.x then use version 1.3 of this gem.
+
+
 # License
 
 MIT License. Copyright 2011, Crowd Interactive http://www.crowdint.com
