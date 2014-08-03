@@ -72,7 +72,7 @@ describe Persistent::Settings do
   describe :persist do
     context "a value already persisted" do
       before :each do
-        @setting = mock(Config)
+        @setting = double(Config)
         Config.stub_chain(:where, :last).and_return(@setting)
       end
 
@@ -107,7 +107,7 @@ describe Persistent::Settings do
   end
 
   context "cache" do
-    let(:cache) { mock }
+    let(:cache) { double }
 
     before do
       Rails.should_receive(:cache).and_return cache
@@ -141,7 +141,7 @@ describe Persistent::Settings do
     context "method that does not end with =" do
       context "already persisted" do
         before :each do
-          @setting = mock(Config, :var => 'persisted_method', :value => 'some value')
+          @setting = double(Config, :var => 'persisted_method', :value => 'some value')
           Config.stub(:all).and_return([@setting])
         end
 
@@ -170,7 +170,7 @@ describe Persistent::Settings do
 
   describe :keys do
     let(:settings) do
-      [ mock(:var => 'a_key'), mock(:var => 'another_key') ]
+      [ double(:var => 'a_key'), double(:var => 'another_key') ]
     end
 
     before do
