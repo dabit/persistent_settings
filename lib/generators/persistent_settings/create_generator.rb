@@ -10,12 +10,12 @@ module PersistentSettings
 
     source_root File.expand_path('../templates', __FILE__)
 
-    def create_model
+    def create_model_file
       @klass_name = class_name.classify
       template 'model.rb.erb', "models/#{class_name}.rb", :verbose => (verbose == 1)
     end
 
-    def create_migration
+    def create_migration_file
       @table_name = class_name.pluralize.gsub("/", "_")
       @migration_class = @table_name.camelize
       migration_template "create_table.rb.erb", "db/migrate/create_#{@table_name}_table.rb", :verbose => (verbose == 1)
