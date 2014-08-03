@@ -5,4 +5,3 @@ gemspec
 
 gem 'railties', '~> 4.0.4'
 gem 'activerecord', '~> 4.0.4'
-gem 'pry-debugger'

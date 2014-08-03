@@ -1,5 +1,6 @@
 require 'persistent_settings'
 require 'logger'
+require 'rails'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.logger = Logger.new("test.log")
